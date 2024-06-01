@@ -1,5 +1,10 @@
 import requests
 
+test_auth = {
+            'email':'limzhichao88@gmail.com',
+            'password' : 'Abc123!'
+            }
+
 test_user = {
             'username' : 'lzc88',
             'email' : 'limzhichao88@gmail.com',
@@ -16,10 +21,10 @@ test_kid = {
 
 root = "http://127.0.0.1:8000/home/"
 
-# user exists
-user_exist = requests.get(root+"user_exists/limzhichao88@gmail.com")
-print(f"(1) {user_exist}")
-print(f"(1) Content: {user_exist.json()}")
+# authentication
+user_auth = requests.get(root+"auth", json=test_auth)
+print(f"(1) {user_auth}")
+print(f"(1) Content: {user_auth.json()}")
 
 # create user
 user_create = requests.post(root+"user_create", json=test_user)
