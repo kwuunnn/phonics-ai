@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request
-from firebase_db import db
+from db_config import db
 
 router = APIRouter()
 
@@ -19,32 +19,30 @@ async def user_auth(request: Request):
     if doc.exists:
         doc_json = doc.to_dict()
         if doc_json['password'] == password:
+            doc_json['message'] = "user exists"
             return doc_json
         else:
             return {'message':'wrong password'}
     else:
         return {"message":"no such user"}
     
-@router.post("/user_create")
+@router.post("/create_user")
 async def user_create(request: Request):
     """
     data = {
             'username':...,
             'email':...,
             'password':...,
-            'pin':...
             }
     """
     data = await request.json()
     username = data['username']
     email = data['email']
     password = data['password']
-    pin = data['pin']
     to_add= {
             "username":username,
             "email":email,
             "password":password,
-            "pin":pin
             }
     doc_ref = db.collection("users").document(email)
     doc = doc_ref.get()
@@ -66,7 +64,7 @@ async def user_getkids(email):
     if len(kids_list)==0:
         return {"message":"no kids"}
     else:
-        return {'kids':kids_list}
+        return {'message':'kids returned', 'kids':kids_list}
     
 @router.post("/user_addkid")
 async def user_addkid(request: Request):

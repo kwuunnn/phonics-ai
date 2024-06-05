@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 import uvicorn
-from routes.home import router as home_router
+from home.routes.home import router as home_router
+from word_scoring.routes.word_score import router as word_router
 
 app = FastAPI()
 
 ##### include routers here #####
 app.include_router(home_router, prefix='/home')
+app.include_router(word_router, prefix='/word')
 
 ##############################
 

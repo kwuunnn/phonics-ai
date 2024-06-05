@@ -27,7 +27,7 @@ print(f"(1) {user_auth}")
 print(f"(1) Content: {user_auth.json()}")
 
 # create user
-user_create = requests.post(root+"user_create", json=test_user)
+user_create = requests.post(root+"create_user", json=test_user)
 print(f"(2) {user_create}")
 print(f"(2) Content: {user_create.json()}")
 
