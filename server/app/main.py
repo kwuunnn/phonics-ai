@@ -7,7 +7,7 @@ app = FastAPI()
 
 ##### include routers here #####
 app.include_router(home_router, prefix='/home')
-app.include_router(word_router, prefix='/word')
+app.include_router(word_router, prefix='/words')
 
 ##############################
 
